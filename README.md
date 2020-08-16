@@ -8,5 +8,5 @@ The Nonebot version of WSGR bot plugin
 1. Restart your Nonebot instance
 
 ## Current Version
-Alpha 0.3.0
+Beta 0.3.0
 Stable 0.2.0
