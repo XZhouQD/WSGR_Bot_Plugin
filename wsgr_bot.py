@@ -7,7 +7,7 @@ A Nonebot Plugin
 use with Resources
 
 Version:
-0.2.0-Beta
+0.3.0-Alpha
 """
 
 class BotCache:
@@ -22,7 +22,7 @@ class BotCache:
         except:
             with open(f'{self.path}ship/{ship_name}.json', 'r') as f:
                 j = loads(f.read())
-            self.cache['ship'][ship_name] = j['data']
+            self.cache['ship'][ship_name] = '[CQ:image,file={self.path}images/L_NORMAL_{j["picId"]}.png]' + j['data']
             return self.cache['ship'][ship_name]
             
     def get_equip(self, equip_name: str):
