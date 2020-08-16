@@ -1,5 +1,7 @@
 from nonebot import on_command, CommandSession, permission
 from json import loads
+from aiocqhttp import MessageSegment
+from os import getcwd
 
 """
 WSGR Info Bot
@@ -7,7 +9,7 @@ A Nonebot Plugin
 use with Resources
 
 Version:
-0.2.0-Beta
+0.3.0-Beta
 """
 
 class BotCache:
@@ -15,16 +17,18 @@ class BotCache:
     def __init__(self):
         self.cache = {'ship':{}, 'equip':{}}
         self.path = 'plugins/wsgr_bot/cn_archive/'
-        
+
     def get_ship(self, ship_name: str):
         try:
             return self.cache['ship'][ship_name]
         except:
             with open(f'{self.path}ship/{ship_name}.json', 'r') as f:
                 j = loads(f.read())
-            self.cache['ship'][ship_name] = j['data']
+            img_seg = MessageSegment.image(f'{getcwd()}/{self.path}images/L_NORMAL_{j["picId"]}.png')
+            print(img_seg)
+            self.cache['ship'][ship_name] = str(img_seg)+j['data']
             return self.cache['ship'][ship_name]
-            
+
     def get_equip(self, equip_name: str):
         try:
             return self.cache['equip'][equip_name]
