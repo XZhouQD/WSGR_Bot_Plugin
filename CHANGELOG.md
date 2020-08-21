@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.4.0-Alpha
+## v0.4.0-Beta
 Added search by ship id
 Temporarily removed ship image
 

@@ -55,7 +55,7 @@ class BotCache:
         #divide into original and modified to avoid bug
         for ship in j["shipCardWu"]:
             temp_id = int(ship["cid"]/100)%100000
-            ship["id"] = temp_id if temp_id < 10000 else temp_id%1000 + temp_id%10000*1000
+            ship["id"] = temp_id if temp_id < 10000 else temp_id%1000 + int(temp_id/10000)*1000
             if ship["cid"] < 11000000 and ship["cid"]%10 <= 3:
                 nameDic[ship["id"]] = ship["title"].replace("•","·").replace("·","-")
             elif ship["cid"] < 20000000 and ship["cid"]%10 <= 3:
