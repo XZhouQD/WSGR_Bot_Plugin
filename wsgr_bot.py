@@ -58,7 +58,7 @@ class BotCache:
                 nameDic[int(ship["cid"]/100)%10000] = ship["title"].replace("•","·").replace("·","-")
             elif ship["cid"] < 20000000 and ship["cid"]%10 <= 3:
                 modifyDic[int(ship["cid"]/100)%10000] = ship["title"].replace("•","·").replace("·","-")
-                if modifyDic[int(ship["cid"]/100)%10000] == nameDic[int(ship["cid"]/100)%10000]-1000]:
+                if modifyDic[int(ship["cid"]/100)%10000] == nameDic[int(ship["cid"]/100)%10000-1000]:
                     modifyDic[int(ship["cid"]/100)%10000] = modifyDic[int(ship["cid"]/100)%10000] + "改"
         flipped = {}
         for key, value in nameDic.items():
