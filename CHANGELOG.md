@@ -1,6 +1,10 @@
 # Changelog
 
-## v0.3.0-Beta
+## v0.4.0-Beta
+Added search by ship id
+Temporarily removed ship image
+
+## v0.3.0
 Added ship image for ships
 
 ## v0.2.0
