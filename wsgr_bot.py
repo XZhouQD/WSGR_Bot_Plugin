@@ -18,6 +18,7 @@ class BotCache:
         self.cache = {'ship':{}, 'equip':{}}
         self.path = 'plugins/wsgr_bot/cn_archive/'
         self.init_json = 'plugins/wsgr_bot/cn_init.json'
+        self.init_id_dict()
 
     def get_ship(self, ship_name: str):
         try:
@@ -54,11 +55,11 @@ class BotCache:
         #divide into original and modified to avoid bug
         for ship in j["shipCardWu"]:
             if ship["cid"] < 11000000 and ship["cid"]%10 <= 3:
-                nameDic[ship["id"]] = ship["title"].replace("•","·").replace("·","-")
+                nameDic[int(ship["cid"]/100)%10000] = ship["title"].replace("•","·").replace("·","-")
             elif ship["cid"] < 20000000 and ship["cid"]%10 <= 3:
-                modifyDic[ship["id"]] = ship["title"].replace("•","·").replace("·","-")
-                if modifyDic[ship["id"]] == nameDic[ship["id"]-1000]:
-                    modifyDic[ship["id"]] = modifyDic[ship["id"]] + "改"
+                modifyDic[int(ship["cid"]/100)%10000]] = ship["title"].replace("•","·").replace("·","-")
+                if modifyDic[int(ship["cid"]/100)%10000]] == nameDic[int(ship["cid"]/100)%10000]-1000]:
+                    modifyDic[int(ship["cid"]/100)%10000]] = modifyDic[ship["id"]] + "改"
         flipped = {}
         for key, value in nameDic.items():
             if value not in flipped:
@@ -126,7 +127,7 @@ async def ship_args_parser(session: CommandSession):
         
 def fetch_ship(ship_name: str, user: int) -> str:
     try:
-        result = bot_cache.get_by_id(int(ship_name)
+        result = bot_cache.get_by_id(int(ship_name))
     except:
         result = bot_cache.get_ship(ship_name)
     return f'[CQ:at,qq={user}] {result}'
