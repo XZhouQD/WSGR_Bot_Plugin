@@ -54,13 +54,15 @@ class BotCache:
         modifyDic = {}
         #divide into original and modified to avoid bug
         for ship in j["shipCardWu"]:
+            temp_id = int(ship["cid"]/100)%100000
+            ship["id"] = temp_id if temp_id < 10000 else temp_id%1000 + temp_id%10000*1000
             if ship["cid"] < 11000000 and ship["cid"]%10 <= 3:
-                nameDic[int(ship["cid"]/100)%100000] = ship["title"].replace("•","·").replace("·","-")
+                nameDic[ship["id"]] = ship["title"].replace("•","·").replace("·","-")
             elif ship["cid"] < 20000000 and ship["cid"]%10 <= 3:
-                modifyDic[int(ship["cid"]/100)%100000] = ship["title"].replace("•","·").replace("·","-")
+                modifyDic[ship["id"]] = ship["title"].replace("•","·").replace("·","-")
                 try:
-                    if modifyDic[int(ship["cid"]/100)%100000] == nameDic[int(ship["cid"]/100)%100000-10000]:
-                        modifyDic[int(ship["cid"]/100)%100000] = modifyDic[int(ship["cid"]/100)%100000] + "改"
+                    if modifyDic[ship["id"]] == nameDic[ship["id"]-1000]:
+                        modifyDic[ship["id"]] = modifyDic[ship["id"]] + "改"
                 except:
                     pass
         flipped = {}
