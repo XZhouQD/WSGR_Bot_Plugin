@@ -52,10 +52,13 @@ def dice(x: int, y: int, user: int, a: int, b: int):
     else:
         result = f'[CQ:at,qq={user}] {x}d{y}+{a}S{b} = '
     rolls = []
-    num_sum = b
+    num_sum = 0
     for i in range(x):
         z = random.choice(range(1, y + 1)) + a
         num_sum += z
         rolls.append(str(z))
-    result = result + ','.join(rolls) + f', Sum = {num_sum}'
+    if b == 0:
+        result = result + ','.join(rolls) + f', Sum = {num_sum}'
+    else:
+        result = result + ','.join(rolls) + f', Sum = {num_sum} + {b} = {num_sum + b}'
     return result
