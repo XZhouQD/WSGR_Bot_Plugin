@@ -4,15 +4,31 @@ import random
 
 @on_command('roll', aliases=('骰子'), permission=permission.GROUP_MEMBER, only_to_me=False)
 async def roll(session: CommandSession):
-    xdy = session.get('xdy')
-    xdy_list = xdy.split('d')
-    x = int(xdy_list[0])
-    y = int(xdy_list[1])
+    xdy_aSb = session.get('xdy+aSb')
+    xdy_list = xdy_aSb.split('+')
+    xdy = xdy_list[0].split('d')
+    x = int(xdy[0])
+    y = int(xdy[1])
     user = session.event.user_id
     group = session.event.group_id
-    result = await dice(x, y, user)
+    if len(xdy_list) > 1:
+        aSb = xdy_list[1].split('S')
+        try:
+            a = int(aSb[0])
+        except:
+            a = 0
+        try:
+            b = int(aSb[1])
+        except:
+            b = 0
+    else:
+        a = 0
+        b = 0
+
+    result = dice(x, y, user, a, b)
     print(result, group)
     await session.send(result)
+
 
 @roll.args_parser
 async def _(session: CommandSession):
@@ -20,17 +36,25 @@ async def _(session: CommandSession):
 
     if session.is_first_run:
         if stripped_arg:
-            session.state['xdy'] = stripped_arg
+            session.state['xdy+aSb'] = stripped_arg
         return
 
-async def dice(x: int, y: int, user: int):
+
+def dice(x: int, y: int, user: int, a: int, b: int):
     if x < 1 or y < 1:
-        return f'[CQ:at,qq={user}]{x}d{y}格式错误！'
-    result = f'[CQ:at,qq={user}] {x}d{y} = '
+        return f'[CQ:at,qq={user}]格式错误！使用/roll xdy+aSb'
+    if a == 0 and b == 0:
+        result = f'[CQ:at,qq={user}] {x}d{y} = '
+    elif a != 0 and b == 0:
+        result = f'[CQ:at,qq={user}] {x}d{y}+{a} = '
+    elif a == 0 and b != 0:
+        result = f'[CQ:at,qq={user}] {x}d{y}+S{b} = '
+    else:
+        result = f'[CQ:at,qq={user}] {x}d{y}+{a}S{b} = '
     rolls = []
-    num_sum = 0
+    num_sum = b
     for i in range(x):
-        z = random.choice(range(1, y+1))
+        z = random.choice(range(1, y + 1)) + a
         num_sum += z
         rolls.append(str(z))
     result = result + ','.join(rolls) + f', Sum = {num_sum}'
