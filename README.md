@@ -1,5 +1,6 @@
 <div align="center">
-# WSGR_Bot_Plugin
+<h1>WSGR_Bot_Plugin</h1>
+
 ### The Nonebot version of WSGR bot plugin
 
 [![](https://img.shields.io/github/license/XZhouQD/WSGR_Bot_Plugin?style=for-the-badge)](https://github.com/XZhouQD/WSGR_Bot_Plugin/blob/master/LICENSE)
