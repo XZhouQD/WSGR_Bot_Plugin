@@ -17,4 +17,3 @@
 
 ## Current Version
 Beta 0.4.0
-Stable 0.3.0
