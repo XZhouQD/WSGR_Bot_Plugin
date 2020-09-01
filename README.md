@@ -8,6 +8,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.7+-blue.svg?style=for-the-badge)
 ![CQHTTP Version](https://img.shields.io/badge/cqhttp-4.8+-black.svg?style=for-the-badge)
 </div>
+
 ## How to use?
 1. Put wsgr_bot.py into your Nonebot plugins/ directory.
 1. Adjust the resource files path in wsgr_bot.py
